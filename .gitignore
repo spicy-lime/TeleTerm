@@ -1,0 +1,7 @@
+dist/
+**.jar
+**.zip
+build/
+.classpath
+.gradle/
+.settings/
