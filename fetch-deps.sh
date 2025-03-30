@@ -1,3 +1,4 @@
+mkdir -p lib/
 set -e
 git clone https://github.com/spicy-lime/jediterm ext/
 pushd ext
