@@ -5,7 +5,6 @@ import com.jediterm.terminal.ui.TerminalPanel;
 import com.jediterm.terminal.ui.settings.DefaultSettingsProvider;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
-import org.jetbrains.annotations.NotNull;
 
 public class CustomSettingsProvider extends DefaultSettingsProvider{
     private Font font;

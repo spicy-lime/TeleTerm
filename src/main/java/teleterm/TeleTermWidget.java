@@ -1,8 +1,6 @@
 package teleterm;
 
-import java.awt.event.KeyEvent;
 
-import com.jediterm.terminal.TtyConnector;
 import com.jediterm.terminal.model.StyleState;
 import com.jediterm.terminal.model.TerminalTextBuffer;
 import com.jediterm.terminal.ui.JediTermWidget;
