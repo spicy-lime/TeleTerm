@@ -1,5 +1,7 @@
 package teleterm;
 
+import java.awt.event.KeyEvent;
+
 import com.jediterm.terminal.TtyConnector;
 import com.jediterm.terminal.model.StyleState;
 import com.jediterm.terminal.model.TerminalTextBuffer;
@@ -15,6 +17,8 @@ public class TeleTermWidget extends JediTermWidget
 			SettingsProvider settingsProvider)
 	{
 		super(columns, lines, settingsProvider);
+		setFocusable(true);
+		requestFocusInWindow(true);
 	}
 
 	@Override
@@ -31,4 +35,5 @@ public class TeleTermWidget extends JediTermWidget
 		teleTermPanel = new TeleTermPanel(settingsProvider, terminalTextBuffer, styleState);
 		return teleTermPanel;
 	}
+	
 }
