@@ -2,6 +2,10 @@ dist/
 **.jar
 **.zip
 build/
+bin/
 .classpath
 .gradle/
 .settings/
+.project
+.pydevproject
+.antProperties.xml
