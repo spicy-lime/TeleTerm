@@ -24,6 +24,9 @@ import ghidra.framework.plugintool.*;
 import ghidra.framework.plugintool.util.PluginStatus;
 import ghidra.util.HelpLocation;
 
+import teleterm.TeleTermConsoleProvider;
+import teleterm.TeleTermStatusProvider;
+
 
 /**
  * Provide class-level documentation that describes what this plugin does.

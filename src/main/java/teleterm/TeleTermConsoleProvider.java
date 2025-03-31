@@ -37,7 +37,7 @@ public class TeleTermConsoleProvider extends ComponentProvider
 
 	public TeleTermConsoleProvider(Plugin plugin, String owner) 
 	{
-		super(plugin.getTool(), "TeleTerm", owner);
+		super(plugin.getTool(), "TeleTerm Console", owner);
 		buildPanel();
 		createActions();
 	}

@@ -3,9 +3,13 @@ package teleterm;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.jediterm.terminal.model.StyleState;
 import com.jediterm.terminal.model.TerminalTextBuffer;
 import com.jediterm.terminal.ui.TerminalPanel;
+import com.jediterm.terminal.ui.TerminalAction;
 import com.jediterm.terminal.ui.settings.SettingsProvider;
 
 public class TeleTermPanel extends TerminalPanel
@@ -32,5 +36,26 @@ public class TeleTermPanel extends TerminalPanel
 	{
 		handleKeyEvent(e);
 		e.consume();
+	}
+
+	@Override
+	public List<TerminalAction> getActions() 
+	{
+		List<TerminalAction> actions = new ArrayList<TerminalAction>(super.getActions());
+		actions.addAll(List.of(
+            new TerminalAction(mySettingsProvider.getLineUpActionPresentation(), input -> 
+            {
+              scrollUp();
+              return true;
+            }).separatorBefore(true)
+            ,
+            new TerminalAction(mySettingsProvider.getLineDownActionPresentation(), input -> 
+            {
+              scrollDown();
+              return true;
+            }
+		)));
+		return actions;
+		
 	}
 }
