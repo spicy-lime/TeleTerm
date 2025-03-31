@@ -63,6 +63,12 @@ public class TeleTermPlugin extends ProgramPlugin {
 		String topicName = this.getClass().getPackage().getName();
 		String anchorName = "HelpAnchor";
 		consoleProvider.setHelpLocation(new HelpLocation(topicName, anchorName));
+		updateStatus("woo");
+	}
+	
+	public void updateStatus(String status)
+	{
+		statusProvider.append(status);
 	}
 
 	@Override
