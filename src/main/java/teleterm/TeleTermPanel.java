@@ -94,22 +94,14 @@ public class TeleTermPanel extends TerminalPanel
 	{
 		List<TerminalAction> actions = new ArrayList<TerminalAction>(super.getActions());
 		actions.addAll(List.of(
-            new TerminalAction(mySettingsProvider.getLineUpActionPresentation(), input -> 
-            {
-              scrollUp();
-              return true;
-            }).separatorBefore(true)
-            ,
-            new TerminalAction(mySettingsProvider.getLineDownActionPresentation(), input -> 
-            {
-              scrollDown();
-              return true;
-            }),
+            menuBuilder.buildQuickSetText(this).separatorBefore(true),
             menuBuilder.buildBaseAddrSubmenu(this),
             menuBuilder.buildGotoSubmenu(this),
             menuBuilder.buildPasteAddressAsSubmenu(this),
             menuBuilder.buildAutoGotoAddress(this)
 		));
+		actions.addAll(TeleTermFactory.actions);
+		actions.addAll(TeleTermFactory.submenus);
 		return actions;
 		
 	}

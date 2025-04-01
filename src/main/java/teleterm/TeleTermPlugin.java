@@ -62,14 +62,13 @@ public class TeleTermPlugin extends ProgramPlugin {
 		statusProvider = new TeleTermStatusProvider(this, pluginName);
 		consoleProvider = new TeleTermConsoleProvider(this, pluginName);
 
+
 		// Customize help (or remove if help is not desired)
 		String topicName = this.getClass().getPackage().getName();
 		String anchorName = "HelpAnchor";
 		consoleProvider.setHelpLocation(new HelpLocation(topicName, anchorName));
 		consoleProvider.widget.getTerminalPanel().setSubmenuBuilder(new TeleTermMenuBuilder(this));
-		logln("woo");
-		logln("woo");
-		logln("woo");
+		TeleTermPythonInterface.setup(this, consoleProvider.widget.getTerminalPanel(), consoleProvider.widget.getTerminalPanel().menuBuilder);
 	}
 	
 	public void logln(String status)

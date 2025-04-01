@@ -17,6 +17,7 @@ import ghidra.framework.plugintool.Plugin;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.mem.MemoryBlock;
 
+
 public class TeleTermMenuBuilder
 {
 	TeleTermPlugin tool;
@@ -131,6 +132,7 @@ public class TeleTermMenuBuilder
 			new TerminalActionPresentation("Auto Go to Address" , empty()), 
 			input -> 
 			{
+				String selection = panel.getSelectionText();
 				try
 				{
 					long selectionAddr = parseGdbInt(panel.getSelectionText());
@@ -160,7 +162,27 @@ public class TeleTermMenuBuilder
 				}
 				catch(Exception e)
 				{
-					tool.logln("Selection Address was not found " + panel.getSelectionText());
+					tool.logln("Selection address was not found " + panel.getSelectionText());
+				}
+				return true;
+			});
+	}
+
+	public TerminalAction buildQuickSetText(TeleTermPanel panel)
+	{
+		return new TerminalAction(
+			new TerminalActionPresentation("Set .text Base Here" , empty()), 
+			input -> 
+			{
+				try
+				{
+					long selectionAddr = parseGdbInt(panel.getSelectionText());
+					activeBases.put(".text", selectionAddr);
+					tool.logln("Changed base of .text to " + panel.getSelectionText());
+				}
+				catch(Exception e)
+				{
+					tool.logln("Selection address was not found " + panel.getSelectionText());
 				}
 				return true;
 			});
