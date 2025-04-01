@@ -32,39 +32,28 @@ public class TeleTermMenuBuilder
 		return Collections.emptyList();
 	}
 
-    public static Integer parseGdbInt(String input) {
-        if (input == null) 
-        {
-            return null;
-        }
+    public static long parseGdbInt(String input) {
         input = input.trim().replace("_", "").toLowerCase();
-        try 
+        // Hex with 0x
+        if (input.startsWith("0x")) 
         {
-            // Hex with 0x
-            if (input.startsWith("0x")) 
-            {
-                return Integer.parseUnsignedInt(input.substring(2), 16);
-            }
-
-            // Leading 0 = octal (but reject just "0")
-            if (input.startsWith("0") && input.length() > 1 && input.chars().allMatch(c -> c >= '0' && c <= '7')) 
-            {
-                return Integer.parseInt(input, 8);
-            }
-
-            // Pure hex with letters, no prefix
-            if (input.matches("[a-f0-9]+") && input.matches(".*[a-f].*")) 
-            {
-                return Integer.parseUnsignedInt(input, 16);
-            }
-
-            // Decimal
-            return Integer.parseInt(input, 10);
-        } 
-        catch (NumberFormatException e) 
-        {
-            return null; // or throw, or return Optional
+            return Long.parseUnsignedLong(input.substring(2), 16);
         }
+
+        // Leading 0 = octal (but reject just "0")
+        if (input.startsWith("0") && input.length() > 1 && input.chars().allMatch(c -> c >= '0' && c <= '7')) 
+        {
+            return Long.parseLong(input, 8);
+        }
+
+        // Pure hex with letters, no prefix
+        if (input.matches("[a-f0-9]+") && input.matches(".*[a-f].*")) 
+        {
+            return Long.parseUnsignedLong(input, 16);
+        }
+
+        // Decimal
+        return Long.parseLong(input, 10);
     }
 
 		
@@ -96,9 +85,7 @@ public class TeleTermMenuBuilder
 							return true;
 						}));
 		}
-	
 		TeleTermSubmenuAction menu = new TeleTermSubmenuAction(new TerminalActionPresentation("Set Base Of", empty()), blockSubmenu); 
-		
 		return menu;
 	}
 
@@ -134,8 +121,39 @@ public class TeleTermMenuBuilder
 							return true;
 						}));
 		}
-	
 		TeleTermSubmenuAction menu = new TeleTermSubmenuAction(new TerminalActionPresentation("Goto Address As", empty()), gotoSubmenu); 
+		return menu;
+	}
+
+	public TeleTermSubmenuAction buildPasteAddressAsSubmenu(TeleTermPanel panel)
+	{
+		List<TerminalAction> gotoSubmenu = new ArrayList<TerminalAction>();
+		for (Map.Entry<String, Long> entry : activeBases.entrySet()) 
+		{
+			gotoSubmenu.add(
+				new TerminalAction(
+						new TerminalActionPresentation(entry.getKey(), empty()), 
+						input -> 
+						{
+							long addr = Long.parseLong(panel.getClipboardString(), 16);
+							try
+							{
+
+								long offset = addr - tool.getCurrentProgram().getMemory().getBlock(entry.getKey()).getStart().getOffset();
+								long termAddr = entry.getValue() + offset;
+								panel.sendString("0x" + Long.toHexString(termAddr));
+								
+							}
+							catch (Exception e)
+							{
+								tool.logln(e.getStackTrace().toString());
+								tool.logln("Failed to paste " + Long.toHexString(addr));
+							}
+							return true;
+						}));
+		}
+	
+		TeleTermSubmenuAction menu = new TeleTermSubmenuAction(new TerminalActionPresentation("Paste Address As", empty()), gotoSubmenu); 
 		
 		return menu;
 	}

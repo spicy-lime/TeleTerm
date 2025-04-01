@@ -72,6 +72,11 @@ public class TeleTermPanel extends TerminalPanel
 	{
 		return Collections.emptyList();
 	}
+	
+	public void sendString(String str)
+	{
+		myTerminalStarter.sendString(str, false);
+	}
 
 
 	@Override
@@ -91,7 +96,8 @@ public class TeleTermPanel extends TerminalPanel
               return true;
             }),
             menuBuilder.buildBaseAddrSubmenu(this),
-            menuBuilder.buildGotoSubmenu(this)
+            menuBuilder.buildGotoSubmenu(this),
+            menuBuilder.buildPasteAddressAsSubmenu(this)
 		));
 		return actions;
 		
