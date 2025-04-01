@@ -35,6 +35,7 @@ public class TeleTermPanel extends TerminalPanel
 		addKeyListener(new KeyAdapter() {
 		    @Override
 		    public void keyPressed(KeyEvent e) {
+		    	handleKeyEvent(e);
 		        e.consume(); 
 		    }
 		});
