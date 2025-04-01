@@ -44,25 +44,29 @@ public class TeleTermPlugin extends ProgramPlugin {
 
 	TeleTermConsoleProvider consoleProvider;
 	TeleTermStatusProvider statusProvider;
+	PluginTool tool;
 
 	/**
 	 * Plugin constructor.
 	 * 
 	 * @param tool The plugin tool that this plugin is added to.
 	 */
-	public TeleTermPlugin(PluginTool tool) 
+	public TeleTermPlugin(PluginTool t) 
 	{
-		super(tool);
+		super(t);
+		tool = t;
+
 
 		// Customize provider (or remove if a provider is not desired)
 		@NotNull String pluginName = getName();
-		consoleProvider = new TeleTermConsoleProvider(this, pluginName);
 		statusProvider = new TeleTermStatusProvider(this, pluginName);
+		consoleProvider = new TeleTermConsoleProvider(this, pluginName);
 
 		// Customize help (or remove if help is not desired)
 		String topicName = this.getClass().getPackage().getName();
 		String anchorName = "HelpAnchor";
 		consoleProvider.setHelpLocation(new HelpLocation(topicName, anchorName));
+		consoleProvider.widget.getTerminalPanel().setSubmenuBuilder(new TeleTermMenuBuilder(this));
 		logln("woo");
 		logln("woo");
 		logln("woo");
