@@ -125,6 +125,47 @@ public class TeleTermMenuBuilder
 		return menu;
 	}
 
+	public TerminalAction buildAutoGotoAddress(TeleTermPanel panel)
+	{
+		return new TerminalAction(
+			new TerminalActionPresentation("Auto Go to Address" , empty()), 
+			input -> 
+			{
+				try
+				{
+					long selectionAddr = parseGdbInt(panel.getSelectionText());
+					String segment = new String();
+					long finalOffset = Long.MAX_VALUE;
+					for (Map.Entry<String, Long> entry : activeBases.entrySet()) 
+					{
+						long distance = selectionAddr - entry.getValue();
+						if( distance > 0 && distance < finalOffset)
+						{
+							finalOffset = distance;
+							segment = entry.getKey();
+						}
+					}
+					if(!segment.isEmpty())
+					{
+						GoToService goToService = tool.tool.getService(GoToService.class);
+						long target = finalOffset + tool.getCurrentProgram().getMemory().getBlock(segment).getStart().getOffset();
+						Address targetAddr = tool.getCurrentProgram().getAddressFactory().getAddress(Long.toHexString(target));
+						if (goToService != null) 
+						{
+							goToService.goTo(targetAddr);
+							tool.logln("Jumped to " + segment + ":" + Long.toHexString(target));
+						}
+					
+					}
+				}
+				catch(Exception e)
+				{
+					tool.logln("Selection Address was not found " + panel.getSelectionText());
+				}
+				return true;
+			});
+	}
+
 	public TeleTermSubmenuAction buildPasteAddressAsSubmenu(TeleTermPanel panel)
 	{
 		List<TerminalAction> gotoSubmenu = new ArrayList<TerminalAction>();
@@ -157,6 +198,7 @@ public class TeleTermMenuBuilder
 		
 		return menu;
 	}
+	
 
 
 }

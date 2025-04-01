@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.jediterm.terminal.TerminalColor;
+import com.jediterm.terminal.TextStyle;
 import com.jediterm.terminal.model.StyleState;
 import com.jediterm.terminal.model.TerminalTextBuffer;
 import com.jediterm.terminal.ui.TerminalPanel;
@@ -55,6 +57,14 @@ public class TeleTermPanel extends TerminalPanel
 	{
 		
 	}
+
+	@Override
+	public TextStyle getInversedStyle(@NotNull TextStyle style) {
+		return style.toBuilder()
+			.setForeground(new TerminalColor(0, 0, 0))        
+			.setBackground(new TerminalColor(255, 255, 255))    
+			.build();
+	}
 	
 	
 	@Override
@@ -97,7 +107,8 @@ public class TeleTermPanel extends TerminalPanel
             }),
             menuBuilder.buildBaseAddrSubmenu(this),
             menuBuilder.buildGotoSubmenu(this),
-            menuBuilder.buildPasteAddressAsSubmenu(this)
+            menuBuilder.buildPasteAddressAsSubmenu(this),
+            menuBuilder.buildAutoGotoAddress(this)
 		));
 		return actions;
 		

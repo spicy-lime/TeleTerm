@@ -1,6 +1,7 @@
 package teleterm;
 
 import com.jediterm.terminal.TerminalColor;
+import com.jediterm.terminal.TextStyle;
 import com.jediterm.terminal.ui.TerminalPanel;
 import com.jediterm.terminal.ui.settings.DefaultSettingsProvider;
 import java.awt.Font;
@@ -15,6 +16,7 @@ public class CustomSettingsProvider extends DefaultSettingsProvider{
     public CustomSettingsProvider() {
         // Try to use a more reliable monospace font that's commonly available
         String[] monospaceFonts = {
+        	"Source Code Pro",
             "Consolas",
             "DejaVu Sans Mono",
             "Liberation Mono",
@@ -97,8 +99,4 @@ public class CustomSettingsProvider extends DefaultSettingsProvider{
         return true;
     }
 
-    @Override
-    public boolean useInverseSelectionColor() {
-        return true;
-    }
 } 
