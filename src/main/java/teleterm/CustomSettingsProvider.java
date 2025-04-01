@@ -26,14 +26,14 @@ public class CustomSettingsProvider extends DefaultSettingsProvider{
         Font selectedFont = null;
         for (String fontName : monospaceFonts) {
             if (isFontAvailable(fontName)) {
-                selectedFont = new Font(fontName, Font.PLAIN, 12);
+                selectedFont = new Font(fontName, Font.PLAIN, 14);
                 break;
             }
         }
         
         // Fallback to system default monospace if none found
         if (selectedFont == null) {
-            selectedFont = new Font("Monospaced", Font.PLAIN, 12);
+            selectedFont = new Font("Monospaced", Font.PLAIN, 14);
         }
         
         this.font = selectedFont;

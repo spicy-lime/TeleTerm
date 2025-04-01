@@ -33,12 +33,11 @@ public class TeleTermMenuBuilder
 	}
 
     public static Integer parseGdbInt(String input) {
-        if (input == null) {
+        if (input == null) 
+        {
             return null;
         }
-
         input = input.trim().replace("_", "").toLowerCase();
-
         try 
         {
             // Hex with 0x
