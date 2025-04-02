@@ -45,7 +45,7 @@ gradle buildExtension -PGHIDRA_INSTALL_DIR=<your ghidra install>
 You can interact with the terminal and plugin environment using `TeleTermPythonInterface`.
 
 ```python
-from teleterm.api import TeleTermPythonInterface as TTI
+from teleterm.TeleTermPythonInterface import *
 
 def do_text_menu(input):
     selectionAddr = parseGdbInt(panel.getSelectionText())
