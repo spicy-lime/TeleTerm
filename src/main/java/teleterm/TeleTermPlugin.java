@@ -17,6 +17,7 @@ package teleterm;
 
 import org.jetbrains.annotations.NotNull;
 
+import docking.util.image.ToolIconURL;
 import ghidra.app.ExamplesPluginPackage;
 import ghidra.app.plugin.PluginCategoryNames;
 import ghidra.app.plugin.ProgramPlugin;
@@ -75,6 +76,7 @@ public class TeleTermPlugin extends ProgramPlugin {
 	{
 		statusProvider.append(status + "\n");
 	}
+	
 
 	@Override
 	public void init() 

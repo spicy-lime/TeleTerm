@@ -2,6 +2,7 @@
 // If provider is desired, it is recommended to move it to its own file
 package teleterm;
 
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
@@ -40,6 +41,7 @@ public class TeleTermConsoleProvider extends ComponentProvider
 		super(plugin.getTool(), "TeleTerm Console", owner);
 		buildPanel();
 		createActions();
+		setIcon(new ImageIcon("assets/icon3.png"));
 	}
 
 	public TeleTermWidget createTerminalWidget() 
