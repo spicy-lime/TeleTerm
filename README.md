@@ -8,7 +8,7 @@
     <h2>TeleTerm - A Better Integrated Terminal for Ghidra</h2>
 </p>
 
-**TeleTerm** is a dynamic analysis extension for ghidra that *isn't a debugger*. It was originally designed as a decoupled debugger integration, so that you can use GDB or QEMU right next to the code browser, and navigate using it. 
+**TeleTerm** is a debugging focused extension for ghidra that *isn't a debugger**. It was originally designed as a decoupled debugger integration, so that you can use GDB or QEMU right next to the code browser, and navigate using it. 
 
 <p align="center">
   <img src="assets/video.gif" alt="TeleTerm"/>
