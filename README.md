@@ -12,7 +12,6 @@
 
 <p align="center">
   <img src="assets/video.gif" alt="TeleTerm"/>
-  <br/>
 </p>
 
 
@@ -21,6 +20,12 @@ TeleTerm embeds a full-featured terminal into the Ghidra UI, and supports moving
 **It supports scripting workflows with PyGhidra**, so you can add new terminal drop down menus, parse input from the terminal and interact with the ghidra system directly from python, without having to interact with Java or recompile. It supports windows and older versions of ghidra, too!
 
 This extension is very new and in active development. Accepting bug reports and feature requests!
+
+
+### Works with neovim!
+<p align="center">
+  <img src="assets/nvim.png" alt="TeleTerm" width=""/>
+</p>
 
 ---
 
@@ -52,7 +57,7 @@ def do_text_menu(input):
     logln("Changed base of .text to " + panel.getSelectionText())
     return True
 
-addAction("python!", do_text_menu) # defines a new menu action, with do_text_menu as callback when clicked
+addAction("python!", do_text_menu) 
 ```
 
 ---
