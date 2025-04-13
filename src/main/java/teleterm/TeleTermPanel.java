@@ -92,16 +92,17 @@ public class TeleTermPanel extends TerminalPanel
 	@Override
 	public List<TerminalAction> getActions() 
 	{
-		List<TerminalAction> actions = new ArrayList<TerminalAction>(super.getActions());
+		List<TerminalAction> actions = new ArrayList<TerminalAction>();
 		actions.addAll(List.of(
             menuBuilder.buildQuickSetText(this).separatorBefore(true),
+            menuBuilder.buildAutoGotoAddress(this),
             menuBuilder.buildBaseAddrSubmenu(this),
             menuBuilder.buildGotoSubmenu(this),
-            menuBuilder.buildPasteAddressAsSubmenu(this),
-            menuBuilder.buildAutoGotoAddress(this)
+            menuBuilder.buildPasteAddressAsSubmenu(this)
 		));
 		actions.addAll(TeleTermFactory.actions);
 		actions.addAll(TeleTermFactory.submenus);
+		actions.addAll(super.getActions());
 		return actions;
 		
 	}
